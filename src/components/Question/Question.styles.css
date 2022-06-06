@@ -1,0 +1,34 @@
+.question {
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+
+  width: 65%;
+  margin: 2%;
+  padding: 2% 2%;
+
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-left: 10px solid #673ab7;
+}
+.question-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.question-type-option {
+  display: flex !important;
+  flex-direction: row !important;
+}
+.MuiInputBase-input {
+  display: flex !important;
+}
+
+.question-footer {
+  margin: 1% 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}

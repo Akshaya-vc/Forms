@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+
+  width: 65%;
+  margin: 2%;
+  padding: 2% 2%;
+
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-top: 10px solid #673ab7;
+}
+.nav-input {
+  margin: 1%;
+}
