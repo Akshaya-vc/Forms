@@ -10,74 +10,46 @@ import {
   Divider,
   FormControlLabel,
   Switch,
+  Input,
+  RadioGroup,
+  Radio,
+  Checkbox,
 } from '@mui/material';
 
-// import {
-//   ShortTextIcon,
-//   FormatAlignLeftIcon,
-//   RadioButtonCheckedIcon,
-//   CheckBoxIcon,
-//   ArrowDropDownCircleIcon,
-//   CloudUploadIcon,
-//   DateRangeIcon,
-//   AccessTimeIcon,
-// } from '@mui/icons-material';
-import ShortTextIcon from '@mui/icons-material/ShortText';
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import LinearScaleIcon from '@mui/icons-material/LinearScale';
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
-import AppsIcon from '@mui/icons-material/Apps';
-import DateRangeIcon from '@mui/icons-material/DateRange';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DeleteIcon from '@mui/icons-material/Delete';
+// import CloseIcon from '@mui/icons-material/Close';
+import OneDirection from '../OneDirection/OneDirection.componenet';
+import types from '../../assets/types';
 
-const types = [
-  { value: 'short-answer', label: 'Short answer', icon: <ShortTextIcon /> },
-  { value: 'long-answer', label: 'Paragraph', icon: <FormatAlignLeftIcon /> },
-  {
-    value: 'multiple-choice',
-    label: 'Multiple choice',
-    icon: <RadioButtonCheckedIcon />,
-  },
-  { value: 'checkbox', label: 'Checkbox', icon: <CheckBoxIcon /> },
-  { value: 'dropdown', label: 'Dropdown', icon: <ArrowDropDownCircleIcon /> },
-  {
-    value: 'file-upload',
-    label: 'File upload',
-    icon: <CloudUploadIcon />,
-  },
-  { value: 'linear-scale', label: 'Linear scale', icon: <LinearScaleIcon /> },
-  {
-    value: 'multiple-choice-grid',
-    label: 'Multiple-choice grid',
-    icon: <DragIndicatorIcon />,
-  },
-  { value: 'tick-box-grid', label: 'Tick box grid', icon: <AppsIcon /> },
-  { value: 'date', label: 'Date', icon: <DateRangeIcon /> },
-  { value: 'time', label: 'Time', icon: <AccessTimeIcon /> },
-];
-
-const Question = ({ info, handleInfo, addQuestion }) => {
+const Question = ({ info, handleInfo, addQuestion, deleteQuestion }) => {
   const { title, type, isActive } = info;
   const handleTitleChange = (event) => {
     handleInfo({ ...info, title: event.target.value });
   };
   const handleTypeChange = (event) => {
     handleInfo({ ...info, type: event.target.value });
+    console.log(event.target.value);
   };
-  const handleDuplicate = () => {
-    addQuestion(info);
+  const handleRequired = () => {
+    handleInfo({ ...info, isRequired: !info.isRequired });
   };
+  const handleDeleteSingleOption = (index) => {
+    handleInfo({
+      ...info,
+      body: {
+        ...info.body,
+        single: info.body.single.filter((op, i) => i !== index),
+      },
+    });
+  };
+
   return (
     <div
       className="question"
       style={{ borderLeft: isActive ? '10px solid #673ab7' : '0' }}
     >
+      {/* Header */}
       <div className="question-header">
         <TextField
           id="question-name"
@@ -113,17 +85,108 @@ const Question = ({ info, handleInfo, addQuestion }) => {
           })}
         </TextField>
       </div>
+
+      {/* Body */}
+      <div className="question-body" style={{ textAlign: 'left' }}>
+        {type === 'short-answer' ? (
+          <Input
+            className="question-body-short-answer"
+            defaultValue="Short description"
+            disabled
+            multiline
+          />
+        ) : type === 'long-answer' ? (
+          <Input
+            className="question-body-long-answer"
+            defaultValue="Long description"
+            disabled
+            multiline
+          />
+        ) : type === 'multiple-choice' ? (
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="female"
+            name="radio-buttons-group"
+          >
+            {info.body.single.map((option, index) => {
+              return (
+                <div className="question-onedirection">
+                  <FormControlLabel control={<Radio />} disabled />
+                  <OneDirection
+                    index={index}
+                    handleDeleteSingleOption={handleDeleteSingleOption}
+                    option={option}
+                    isLast={info.body.single.length === 1}
+                  />
+                </div>
+              );
+            })}
+            <div className="question-onedirection">
+              <FormControlLabel control={<Radio />} disabled />
+              <Input
+                className="question-body-short-answer"
+                value="Add new"
+                multiline
+              />
+            </div>
+          </RadioGroup>
+        ) : type === 'checkbox' ? (
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="female"
+            name="radio-buttons-group"
+          >
+            {info.body.single.map((option, index) => {
+              return (
+                <div className="question-onedirection">
+                  <FormControlLabel control={<Checkbox />} disabled />
+                  <OneDirection
+                    index={index}
+                    handleDeleteSingleOption={handleDeleteSingleOption}
+                    option={option}
+                    isLast={info.body.single.length === 1}
+                  />
+                </div>
+              );
+            })}
+          </RadioGroup>
+        ) : type === 'dropdown' ? (
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="female"
+            name="radio-buttons-group"
+          >
+            {info.body.single.map((option, index) => {
+              return (
+                <div className="question-onedirection">
+                  {index + 1}.&nbsp;
+                  <OneDirection
+                    index={index}
+                    handleDeleteSingleOption={handleDeleteSingleOption}
+                    option={option}
+                    isLast={info.body.single.length === 1}
+                  />
+                </div>
+              );
+            })}
+          </RadioGroup>
+        ) : null}
+      </div>
       <br />
       <Divider />
+
+      {/* Footer */}
       <div className="question-footer">
-        <IconButton aria-label="duplicate" onClick={handleDuplicate}>
+        <IconButton aria-label="duplicate" onClick={() => addQuestion(info)}>
           <ContentCopyIcon />
         </IconButton>
-        <IconButton aria-label="delete">
+        <IconButton aria-label="delete" onClick={() => deleteQuestion(info.id)}>
           <DeleteIcon />
         </IconButton>
         <FormControlLabel
-          control={<Switch defaultChecked />}
+          control={
+            <Switch checked={info.isRequired} onChange={handleRequired} />
+          }
           label="Required"
           labelPlacement="start"
         />
@@ -136,6 +199,7 @@ Question.propTypes = {
   info: PropTypes.arrayOf.isRequired,
   handleInfo: PropTypes.func.isRequired,
   addQuestion: PropTypes.func.isRequired,
+  deleteQuestion: PropTypes.func.isRequired,
 };
 
 export default Question;

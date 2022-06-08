@@ -8,16 +8,24 @@ const App = () => {
     {
       title: 'question 1',
       type: 'short-answer',
-      options: [],
+      body: {
+        single: ['option 1', 'option 2'],
+        multiple: [[], []],
+      },
       id: 1,
       isActive: true,
+      isRequired: false,
     },
     {
       title: 'question 2',
       type: 'checkbox',
-      options: [],
+      body: {
+        single: ['option 1', 'option 2'],
+        multiple: [['row 1'], ['column 2']],
+      },
       id: 2,
       isActive: false,
+      isRequired: true,
     },
   ]);
   const handleChange = (info) => {
@@ -31,7 +39,10 @@ const App = () => {
     const newObj = { ...info, id: questionList.length + 1 };
     setQuestionList([...questionList, newObj]);
   };
-  console.log(questionList);
+  const handleDelete = (id) => {
+    const newArr = questionList.filter((question) => question.id !== id);
+    setQuestionList(newArr);
+  };
   return (
     <div className="App">
       <Navbar />
@@ -41,6 +52,7 @@ const App = () => {
             info={question}
             handleInfo={handleChange}
             addQuestion={handleNew}
+            deleteQuestion={handleDelete}
             key={index}
           />
         );
