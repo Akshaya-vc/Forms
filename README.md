@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+# Google forms Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About:
 
-## Available Scripts
+This project is a frontend clone of Google Forms
 
-In the project directory, you can run:
+## Technologies used
 
-### `npm start`
+- React JS
+- Redux
+- Material UI
+- Netlify
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Demo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Click [here]() to view the demo
 
-### `npm test`
+## Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- File
+- Design of redux store
 
-### `npm run build`
+```
+about: {
+    name: string,
+    description: string,
+}
+questionList = [
+    {id: int,
+     title: string,
+     type: string,
+     isActive: bool,
+     isRequired: bool,
+     body: {
+         single: [strings],
+         multiple: {
+             row: [strings],
+             column: [strings],
+         },
+         fileupload: {
+             size: string,
+             number: int,
+             isSpecific: bool,
+             type: [int],
+         },
+         linearScale: {
+            label1: string,
+            label2: string,
+            range1: int,
+            range2: int,
+         }
+     }
+}]
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Designing the Actions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+{   type: 'UPDATE_NAME', 
+    payload: {
+        about.name: string
+    }
+}
+{   type: 'UPDATE_DESCRIPTION', 
+    payload: {
+        about.description: string
+    }
+}
+{   type: 'DUPLICATE_QUESTION', 
+    payload: {
+        id
+    }
+}
+{   type: 'DELETE_QUESTION', 
+    payload: {
+        id
+    }
+}
+{   type: 'ADD_QUESTION', 
+    payload: {
+        id
+    }
+}
+BODY
+{   type: 'UPDATE_TITLE', 
+    payload: {
+        id
+        questionList[i].title: string
+    }
+}
+{   type: 'UPDATE_TYPE', 
+    payload: {
+        id
+        questionList[i].type: string
+    }
+}
+{   type: 'TOGGLE_ACTIVE', 
+    payload: {
+       id
+    }
+}
+{   type: 'TOGGLE_REQUIRED', 
+    payload: {
+        id
+    }
+}
+{   type: 'ADD_SINGLE_OPTION', 
+    payload: {
+        id
+        option: string
+    }
+}
+{   type: 'ADD_MULTIPLE_OPTION', 
+    payload: {
+        id
+        option: string
+        dimension: bool
+    }
+}
+```
+- Desiging Reducers
+```
+- About 
+- Questions
+    - add, delete, duplicate, updatetitle, updatetype
+- Body
+    - addoption, deleteoption, toggleactive, togglerequired, 
+```
