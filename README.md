@@ -16,7 +16,37 @@ This project is a frontend clone of Google Forms
 Click [here](https://62a231fa8fbef00008d28f38--willowy-youtiao-2aa222.netlify.app/) to view the demo
 
 ## Structure
-
+- File architecture
+```
+.src
+├── assets
+|   └── types.jsx
+├── components
+|   ├── Navbar
+|   ├── Card
+|   ├── Header
+|   ├── Body
+|   ├── Footer
+|   └── Options
+|       ├── Text
+|       ├── OneDimension
+|       ├── TwoDimension
+|       ├── File
+|       └── LinearScale
+├── redux
+|   ├── about
+|   |   ├── about.reducer.js
+|   |   └── about.actions.js
+|   ├── questions
+|   |   ├── questions.reducer.js
+|   |   └── questions.actions.js
+|   ├── state.js
+|   └── store.js
+├── App.js
+├── App.css
+├── index.js
+└── index.css
+```
 - Design of redux store
 
 ```

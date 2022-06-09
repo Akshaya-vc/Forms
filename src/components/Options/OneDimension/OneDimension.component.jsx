@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 
 import store from '../../../redux/store';
-import { update1dOption } from '../../../redux/questions/questions.reducer';
+import { update1dOption } from '../../../redux/questions/questions.actions';
 
 const OneDimension = ({ info }) => {
   const { type } = info;

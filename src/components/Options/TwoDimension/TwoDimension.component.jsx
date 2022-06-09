@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 
 import store from '../../../redux/store';
-import { update2dOption } from '../../../redux/questions/questions.reducer';
+import { update2dOption } from '../../../redux/questions/questions.actions';
 
 const TwoDimension = ({ info }) => {
   const { type } = info;

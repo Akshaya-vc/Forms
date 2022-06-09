@@ -1,104 +1,16 @@
 /* eslint-disable default-param-last */
 import appState from '../state';
-
-const DELETE_QUESTION = 'DELETE_QUESTION';
-const DUPLICATE_QUESTION = 'DUPLICATE_QUESTION';
-const ADD_QUESTION = 'ADD_QUESTION';
-
-const UPDATE_TITLE = 'UPDATE_TITLE';
-const UPDATE_TYPE = 'UPDATE_TYPE';
-
-const TOGGLE_REQUIRED = 'TOGGLE_REQUIRED';
-const TOGGLE_ACTIVE = 'TOGGLE_ACTIVE';
-const TOGGLE_SPECIFIC = 'TOGGLE_SPECIFIC';
-const TOGGLE_SPECIFIC_VALUE = 'TOGGLE_SPECIFIC_VALUE';
-
-const UPDATE_1D_OPTION = 'UPDATE_1D_OPTION';
-const UPDATE_2D_OPTION = 'UPDATE_1D_OPTION';
-
-const UPDATE_LINEAR_SCALE_LABEL = 'UPDATE_LINEAR_SCALE_LABEL';
-const UPDATE_LINEAR_SCALE_RANGE = 'UPDATE_LINEAR_SCALE_LABEL';
-
-const UPDATE_FILE_RANGE = 'UPDATE_FILE_RANGE';
-
-export const deleteQuestion = (id) => ({
-  type: DELETE_QUESTION,
-  payload: { id },
-});
-
-export const duplicateQuestion = (id) => ({
-  type: DUPLICATE_QUESTION,
-  payload: { id },
-});
-
-export const addQuestion = (id) => ({
-  type: ADD_QUESTION,
-  payload: { id },
-});
-
-export const updateTitle = (id, text) => ({
-  type: UPDATE_TITLE,
-  payload: { id, text },
-});
-export const updateType = (id, text) => ({
-  type: UPDATE_TYPE,
-  payload: { id, text },
-});
-
-export const toggleRequired = (id) => ({
-  type: TOGGLE_REQUIRED,
-  payload: { id },
-});
-
-export const toggleActive = (id) => ({
-  type: TOGGLE_ACTIVE,
-  payload: { id },
-});
-
-export const toggleSpecific = (id) => ({
-  type: TOGGLE_SPECIFIC,
-  payload: { id },
-});
-
-export const toggleSpecificValue = (id, value) => ({
-  type: TOGGLE_SPECIFIC_VALUE,
-  payload: { id, value },
-});
-
-export const update1dOption = (id, optionid, text) => ({
-  type: UPDATE_1D_OPTION,
-  payload: { id, optionid, text },
-});
-
-export const update2dOption = (id, dimensionName, optionid, text) => ({
-  type: UPDATE_1D_OPTION,
-  payload: { id, dimensionName, optionid, text },
-});
-
-export const updateLinearScaleRange = (id, rangeName, value) => ({
-  type: UPDATE_LINEAR_SCALE_RANGE,
-  payload: { id, rangeName, value },
-});
-
-export const updateFileRange = (id, rangeName, value) => ({
-  type: UPDATE_FILE_RANGE,
-  payload: { id, rangeName, value },
-});
-
-export const updateLinearScaleLabel = (id, rangeName, text) => ({
-  type: UPDATE_LINEAR_SCALE_LABEL,
-  payload: { id, rangeName, text },
-});
+import * as actions from './questions.actions';
 
 export const questionsReducer = (state = appState.question, action) => {
   switch (action.type) {
-    case DELETE_QUESTION: {
+    case actions.DELETE_QUESTION: {
       const newArr = state.filter((question) => {
         return question.id !== action.payload.id;
       });
       return newArr;
     }
-    case DUPLICATE_QUESTION: {
+    case actions.DUPLICATE_QUESTION: {
       let newObj;
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
@@ -116,7 +28,7 @@ export const questionsReducer = (state = appState.question, action) => {
       newArr.sort((a, b) => a.id - b.id);
       return newArr;
     }
-    case ADD_QUESTION: {
+    case actions.ADD_QUESTION: {
       let newObj;
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
@@ -136,7 +48,7 @@ export const questionsReducer = (state = appState.question, action) => {
       newArr.sort((a, b) => a.id - b.id);
       return newArr;
     }
-    case UPDATE_TITLE: {
+    case actions.UPDATE_TITLE: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           return { ...q, title: action.payload.text };
@@ -145,7 +57,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case UPDATE_TYPE: {
+    case actions.UPDATE_TYPE: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           return { ...q, type: action.payload.text };
@@ -154,7 +66,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case TOGGLE_REQUIRED: {
+    case actions.TOGGLE_REQUIRED: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           return { ...q, isRequired: !q.isRequired };
@@ -163,7 +75,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case TOGGLE_ACTIVE: {
+    case actions.TOGGLE_ACTIVE: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           return { ...q, isActive: !q.isActive };
@@ -172,7 +84,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case TOGGLE_SPECIFIC: {
+    case actions.TOGGLE_SPECIFIC: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           return {
@@ -191,7 +103,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case TOGGLE_SPECIFIC_VALUE: {
+    case actions.TOGGLE_SPECIFIC_VALUE: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           return {
@@ -214,7 +126,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case UPDATE_1D_OPTION: {
+    case actions.UPDATE_1D_OPTION: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           const newOptions = q.body.single.map((option, index) => {
@@ -229,7 +141,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case UPDATE_2D_OPTION: {
+    case actions.UPDATE_2D_OPTION: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           const newOptions = q.body.single.map((option, index) => {
@@ -244,7 +156,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case UPDATE_LINEAR_SCALE_RANGE: {
+    case actions.UPDATE_LINEAR_SCALE_RANGE: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           return {
@@ -262,7 +174,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case UPDATE_FILE_RANGE: {
+    case actions.UPDATE_FILE_RANGE: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           return {
@@ -280,7 +192,7 @@ export const questionsReducer = (state = appState.question, action) => {
       });
       return newArr;
     }
-    case UPDATE_LINEAR_SCALE_LABEL: {
+    case actions.UPDATE_LINEAR_SCALE_LABEL: {
       const newArr = state.map((q) => {
         if (q.id === action.payload.id) {
           return {

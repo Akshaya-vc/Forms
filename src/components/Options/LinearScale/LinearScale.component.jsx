@@ -14,7 +14,7 @@ import store from '../../../redux/store';
 import {
   updateLinearScaleRange,
   updateLinearScaleLabel,
-} from '../../../redux/questions/questions.reducer';
+} from '../../../redux/questions/questions.actions';
 
 const LinearScale = ({ info }) => {
   const range1 = [

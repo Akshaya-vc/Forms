@@ -9,7 +9,7 @@ import {
   updateTitle,
   updateType,
   // toggleActive,
-} from '../../redux/questions/questions.reducer';
+} from '../../redux/questions/questions.actions';
 
 const Header = ({ info }) => {
   const { title, type } = info;

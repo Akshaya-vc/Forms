@@ -15,7 +15,7 @@ import {
   toggleRequired,
   addQuestion,
   // toggleActive,
-} from '../../redux/questions/questions.reducer';
+} from '../../redux/questions/questions.actions';
 
 const Footer = ({ info }) => {
   return (

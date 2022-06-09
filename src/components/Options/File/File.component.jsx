@@ -14,7 +14,7 @@ import {
   toggleSpecific,
   updateFileRange,
   toggleSpecificValue,
-} from '../../../redux/questions/questions.reducer';
+} from '../../../redux/questions/questions.actions';
 
 const File = ({ info }) => {
   const total = [
