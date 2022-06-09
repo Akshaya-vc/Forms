@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import './Navbar.styles.css';
 import Input from '@mui/material/Input';
-import { updateName, updateDesc } from '../../redux/about/about.reducers';
+import { updateName, updateDesc } from '../../redux/about/about.reducer';
 import store from '../../redux/store';
 
 const Navbar = ({ name, description }) => {

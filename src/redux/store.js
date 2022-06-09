@@ -1,17 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { aboutReducer } from './about/about.reducers';
-// import { applyMiddleware } from 'redux';
-// import logger from 'redux-logger';
-
-// import rootReducer from './root-reducer';
-
-// const middlewares = [logger];
+import { aboutReducer } from './about/about.reducer';
+import { questionsReducer } from './questions/questions.reducer';
 
 const store = configureStore({
   reducer: {
     about: aboutReducer,
-    // question: questionReducer,
-    // body: bodyReducer,
+    question: questionsReducer,
   },
 });
 

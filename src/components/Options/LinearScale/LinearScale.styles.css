@@ -1,0 +1,22 @@
+.linear-scale{
+    margin: 0% 4%;
+}
+.linear-scale-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  margin-bottom: 10px;
+}
+.linear-scale-ranges {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  margin-bottom: 10px;
+}
+
+.linear-scale-ranges div{
+  display: flex;
+  flex-direction: row;
+}
